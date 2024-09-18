@@ -1,0 +1,37 @@
+/* Estructura general de la página */
+.app {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Estilos para cada sección */
+.header, .subheader, .content, .footer {
+  border: 2px solid #333;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Colores temporales para diferenciar las secciones */
+.header {
+  background-color: lightblue;
+}
+
+.subheader {
+  background-color: lightgreen;
+}
+
+.content {
+  background-color: lightcoral;
+}
+
+.footer {
+  background-color: lightgray;
+}
