@@ -1,26 +1,22 @@
 import React from 'react';
-import './styles/App.css'; // Puedes usar Tailwind si decides integrarlo
+import './styles/index.css'; // Puedes usar Tailwind si decides integrarlo
 
 const App: React.FC = () => {
   return (
     <div className="app">
-      {/* Header */}
-      <header className="header">
+      <header className="bg-blue-200 p-6 border-2 border-gray-700">
         <h1>Header (Placeholder)</h1>
       </header>
 
-      {/* Subheader */}
-      <section className="subheader">
+      <section className="bg-green-200 p-6 border-2 border-gray-700">
         <h2>Subheader (Placeholder)</h2>
       </section>
 
-      {/* Content */}
-      <main className="content">
+      <main className="bg-red-200 p-6 border-2 border-gray-700">
         <p>Content (Placeholder)</p>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
+      <footer className="bg-gray-300 p-6 border-2 border-gray-700">
         <p>Footer (Placeholder)</p>
       </footer>
     </div>
