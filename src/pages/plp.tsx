@@ -98,16 +98,6 @@ const products = [
 const PLP: React.FC = () => {
 return (
     <div className="max-w-screen-xl mx-auto px-6 py-10 font-poppins"> 
-    <nav className="text-base mb-6"> 
-        <a href="index.html" className="text-blue-600">
-        Inicio
-        </a>{" "}
-        &gt;{" "}
-        <a href="#" className="text-blue-600">
-        Tecnología
-        </a>{" "}
-        &gt; <span>Computadores</span>
-    </nav>
     <h2 className="text-3xl font-bold mb-6">Computadores</h2> 
     <div className="flex flex-wrap mt-6">  
         {/* faltan los filtros en el aside*/}
