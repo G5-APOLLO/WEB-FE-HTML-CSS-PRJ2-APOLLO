@@ -1,4 +1,5 @@
 import { MenuItemType } from "../types/MenuItem.type";
+import { Link } from "react-router-dom";
 
 export function Subheader({ menuItems }: { menuItems: MenuItemType[] }) {
   return (
@@ -12,12 +13,12 @@ export function Subheader({ menuItems }: { menuItems: MenuItemType[] }) {
             <ul className="absolute hidden group-hover:block top-full left-0 bg-white text-black list-none p-0 m-0 shadow-md">
               {item.subcategories.map((sub) => (
                 <li key={sub.name}>
-                  <a
-                    href={sub.url === "#" ? undefined : sub.url}
+                  <Link
+                    to={`${sub.url}?optionId=${sub.id}`}
                     className="text-[13px] sm:text-base block py-[7px] sm:py-[10px] px-[2px] sm:px-[15px] no-underline text-black hover:bg-[#fcfcfc]"
                   >
                     {sub.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
