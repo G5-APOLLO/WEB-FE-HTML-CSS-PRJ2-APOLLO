@@ -4,7 +4,7 @@ import { Home } from "../pages/Home";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/WEB-FE-HTML-CSS-PRJ2-APOLLO",
     element: <Home />,
   },
 ]);

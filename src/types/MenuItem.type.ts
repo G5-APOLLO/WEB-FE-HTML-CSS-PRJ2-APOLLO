@@ -1,5 +1,4 @@
 export interface MenuItemType {
-    category: string;
-    subcategories: { name: string; url: string }[];
-  }
-  
+  category: string;
+  subcategories: { id: number; name: string; url: string }[];
+}
