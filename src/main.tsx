@@ -6,7 +6,7 @@ import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename='/WEB-FE-HTML-CSS-PRJ2-APOLLO'>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </StrictMode>,
