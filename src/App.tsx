@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/index.css'; // Puedes usar Tailwind si decides integrarlo
 
+
 const App: React.FC = () => {
   return (
     <div className="app">
