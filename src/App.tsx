@@ -1,12 +1,11 @@
 import React from 'react';
+import { Header } from './components/Header';
 import './styles/index.css'; // Puedes usar Tailwind si decides integrarlo
 
 const App: React.FC = () => {
   return (
-    <div className="app">
-      <header className="bg-blue-200 p-6 border-2 border-gray-700">
-        <h1>Header (Placeholder)</h1>
-      </header>
+    <div className="app font-poppins">
+      <Header />
 
       <section className="bg-green-200 p-6 border-2 border-gray-700">
         <h2>Subheader (Placeholder)</h2>
