@@ -13,8 +13,7 @@ const App: React.FC = () => {
         <h2>Subheader (Placeholder)</h2>
       </section>
 
-      <main className="bg-red-200 p-6 border-2 border-gray-700">
-        <p>Content (Placeholder)</p>
+      <main className="">
         <HomePage />
       </main>
      
