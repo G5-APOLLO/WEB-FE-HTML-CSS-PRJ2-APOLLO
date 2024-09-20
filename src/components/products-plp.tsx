@@ -23,7 +23,7 @@ const Product: React.FC<ProductProps> = ({ image, name, rating, description, nor
             {[...Array(5)].map((_, i) => (
                 <img
                 key={i}
-                src={i < rating ? './img/plp/star-1-svgrepo-com.svg' : './img/plp/star-slash-svgrepo-com.svg'}
+                src={i < rating ? '/img/plp/star-1-svgrepo-com.svg' : '/img/plp/star-slash-svgrepo-com.svg'}
                 alt="star"
                 className="w-8 h-8 mr-7 transform transition-transform duration-300 ease-in-out group-hover:scale-110"
                 />
