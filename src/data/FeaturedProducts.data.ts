@@ -38,7 +38,7 @@ export const products = [
     {
       id: 5,
       name: 'Cámara de Acción GOPRO Hero 12 Black',
-      image: 'GOPRO.png',
+      image: 'Camara-GOPRO.png',
       normalPrice: 1989900,
       discountedPrice: 1392930,
       discount: 30,
