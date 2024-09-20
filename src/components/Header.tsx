@@ -17,7 +17,8 @@ export function Header() {
         <input
           type="text"
           placeholder="Buscar..."
-          className=" w-[50%] ml-[5px] sm:w-[100%] h-[40px] sm:h-[100%] px-4 py-3 text-base border border-gray-300 rounded-l-xl bg-[#413b3c] text-white focus:bg-[#645b5d] transform focus:scale-105 "
+          className="w-[50%] ml-[5px] sm:w-[100%] h-[40px] sm:h-[100%] px-4 py-3 text-base border border-gray-300 rounded-l-xl bg-[#413b3c] 
+          text-white focus:bg-[#645b5d] transform focus:scale-105 sm:placeholder-white placeholder-transparent"
         />
         <button className="flex-shrink-0 px-2 sm:px-4  py-3  border border-gray-300 border-l-0 cursor-pointer rounded-r-xl bg-[#413b3c]">
           <img 
