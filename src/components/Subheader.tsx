@@ -14,7 +14,7 @@ export function Subheader({ menuItems }: { menuItems: MenuItemType[] }) {
               {item.subcategories.map((sub) => (
                 <li key={sub.name}>
                   <Link
-                    to={`${sub.url}?optionId=${sub.id}`}
+                    to={`${sub.url}?optionCategory=${item.category}&optionId=${sub.id}&optionName=${sub.name}`}
                     className="text-[13px] sm:text-base block py-[7px] sm:py-[10px] px-[10px] sm:px-[15px] no-underline text-black hover:bg-[#fcfcfc]"
                   >
                     {sub.name}
