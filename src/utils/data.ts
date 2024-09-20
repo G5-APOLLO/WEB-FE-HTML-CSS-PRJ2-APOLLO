@@ -1,5 +1,7 @@
 import { MenuItemType } from "../types/MenuItem.type";
+
 const url = "/plp"
+
 export const menuItems: MenuItemType[] = [
   {
     category: "Tecnología",
