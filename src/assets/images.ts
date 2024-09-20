@@ -11,6 +11,7 @@ import neveraLG from './img/Nevera-LG.png';
 import lavadoraSamsung from './img/Lavadora-SAMSUNG.png';
 import aireWhirlpool from './img/aire.png';
 
+
 export default {
     "iPhone 15": iPhone15,
     "Samsung Galaxy": samsungGalaxy,

@@ -1,4 +1,5 @@
 import React from 'react';
+import { importImage } from '../utils/importImage';
 
 interface ProductProps {
   id: number;
@@ -17,7 +18,7 @@ const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, dis
   return (
     <div className="bg-zinc-100 rounded-lg shadow-md flex flex-col items-center p-4 hover:shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform">
       <a href={pdpLink}>
-        <img src={image} alt={name} className="w-full h-48 object-cover" />
+        <img src={importImage(image)} alt={name} className="w-full h-48 object-cover" />
       </a>
       <div className="text-center mt-4">
         <h3 className="text-xl font-bold">{name}</h3>
