@@ -1,9 +1,6 @@
 import React from 'react';
+import {FilterProps} from '../types/filters-plp-props';
 
-interface FilterProps {
-  title: string;
-  options: { label: string; count: number }[];
-}
 
 const Filter: React.FC<FilterProps> = ({ title, options }) => {
   return (
