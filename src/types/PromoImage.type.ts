@@ -9,7 +9,7 @@ export interface ProductProps {
 }
 
 
-export interface PromoImageProps  {
+export interface PromoImageProps   {
   image: string;
   imageResponsive: string;
   alt: string;
