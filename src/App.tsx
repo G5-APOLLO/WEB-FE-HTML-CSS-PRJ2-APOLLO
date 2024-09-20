@@ -1,8 +1,8 @@
 import React from 'react';
 import './styles/index.css';
 import { Home } from "./pages/Home";
+import PLP from "./pages/plp"
 import { Routes, Route } from "react-router-dom";
-
 
 const App: React.FC = () => {
   return (
@@ -10,6 +10,8 @@ const App: React.FC = () => {
         <Routes>
             <Route path="/" 
             element= {<Home/>} />
+            <Route path="/plp" 
+            element= {<PLP/>} />
         </Routes>
         </div>
     );
