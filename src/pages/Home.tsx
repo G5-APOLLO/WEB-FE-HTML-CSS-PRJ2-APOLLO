@@ -1,18 +1,14 @@
 import { Main } from "../layout/Main";
+import FeaturedProductsList from "../components/FeaturedProductList";
 
 export function Home() {
-    return (
-        <Main>
+  return (
+    <Main>
       <div className="app font-poppins">
-  
-        <main className="bg-red-200 p-6 border-2 border-gray-700">
-          <p>Content (Placeholder)</p>
-        </main>
-  
-        <footer className="bg-gray-300 p-6 border-2 border-gray-700">
-          <p>Footer (Placeholder)</p>
-        </footer>
+        <section className="featured-products mt-10">
+          <FeaturedProductsList />
+        </section>
       </div>
-      </Main>
-    );
-  }
+    </Main>
+  );
+}
