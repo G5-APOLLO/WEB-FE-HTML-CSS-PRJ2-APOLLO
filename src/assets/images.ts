@@ -26,15 +26,3 @@ export default {
     "Lavadora Samsung": lavadoraSamsung,
     "Aire Whirlpool": aireWhirlpool
 };
-
-import logoImg from  './img/Logo.png';
-import searchIconImg from  './img/search-alt-2-svgrepo-com.svg';
-import accountIconImg from  './img/account-svgrepo-com.svg';
-import cartIconImg from  './img/shopping-cart-svgrepo-com.svg';
-
-export const headerImages = {
-    "Logo": logoImg,
-    "search": searchIconImg,
-    "account": accountIconImg,
-    "cart": cartIconImg
-  };
