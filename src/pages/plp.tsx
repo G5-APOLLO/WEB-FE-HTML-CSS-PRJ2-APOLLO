@@ -1,6 +1,6 @@
 import React from 'react';
 import Product from '../components/products-plp';
-
+import Filter from '../components/filters';
 
 const products = [
         {
@@ -93,14 +93,63 @@ const products = [
         },
     ];
 
-    {/* faltan los filtros en el aside*/}
+    const filters = [
+        {
+        title: 'Marca',
+        options: [
+            { label: 'HP', count: 3 },
+            { label: 'LENOVO', count: 5 },
+            { label: 'ZSUS', count: 8 },
+            { label: 'APPLE', count: 8 },
+        ],
+        },
+        {
+        title: 'RAM',
+        options: [
+            { label: '32 GB', count: 3 },
+            { label: '24 GB', count: 5 },
+            { label: '16 GB', count: 8 },
+            { label: '8 GB', count: 8 },
+        ],
+        },
+        {
+        title: 'Tipo de Disco',
+        options: [
+            { label: 'HDD', count: 7 },
+            { label: 'SSD', count: 12 },
+            { label: 'SSD M.2', count: 10 },
+        ],
+        },
+        {
+        title: 'Capacidad Disco Duro',
+        options: [
+            { label: 'SSD 256GB', count: 3 },
+            { label: 'SSD 512GB', count: 5 },
+            { label: 'SSD 1TB', count: 8 },
+            { label: 'SSD 2TB', count: 3 },
+        ],
+        },
+        {
+        title: 'Sistema Operativo',
+        options: [
+            { label: 'Windows', count: 20 },
+            { label: 'MacOS', count: 6 },
+            { label: 'Linux', count: 5 },
+        ],
+        },
+    ];
 
 const PLP: React.FC = () => {
 return (
     <div className="max-w-screen-xl mx-auto px-6 py-10 font-poppins"> 
     <h2 className="text-3xl font-bold mb-6">Computadores</h2> 
     <div className="flex flex-wrap mt-6">  
-        {/* faltan los filtros en el aside*/}
+    <aside className="w-full md:w-1/6 mb-6 md:mb-0 md:mr-6 mt-16">
+        <h2 className="text-2xl font-bold mb-6">Filtros</h2> 
+        {filters.map((filter, index) => (
+            <Filter key={index} title={filter.title} options={filter.options} />
+        ))}
+        </aside>
         <section className="flex-1">
         <div className="flex justify-between items-center mb-4">
             <span>40 resultados de computadores</span>
