@@ -9,6 +9,9 @@ interface ProductProps {
   discount: number;
   pdpLink: string;
 }
+const formatCurrency = (value: number): string => {
+  return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+};
 
 const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount, pdpLink }) => {
   return (
@@ -18,8 +21,8 @@ const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, dis
       </a>
       <div className="text-center mt-4">
         <h3 className="text-xl font-bold">{name}</h3>
-        <p className="text-gray-500 line-through">${normalPrice.toFixed(2)}</p>
-        <p className="text-red-500 font-bold">${discountedPrice.toFixed(2)} ({discount}% off)</p>
+        <p className="text-gray-500 line-through">{formatCurrency(normalPrice)}</p>
+        <p className="text-red-500 font-bold">{formatCurrency(discountedPrice)} ({discount}% off)</p>
       </div>
       <button className="mt-4 bg-zinc-600 text-white px-4 py-2 rounded hover:bg-neutral-700">
         Add to Cart
