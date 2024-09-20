@@ -1,6 +1,6 @@
 import React from 'react';
 import PromoImage from './PromoImage';
-import { promoImages } from '../data/PromoImages';
+import { promoImages } from '../data/PromoImages.data';
 
 const PromoImagesSection: React.FC = () => {
     return (
