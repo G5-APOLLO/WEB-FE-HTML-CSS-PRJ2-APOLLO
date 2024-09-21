@@ -1,14 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { BreadcrumbItem, BreadcrumbProps } from '../types/BreadCrumbs.type';
 
-interface BreadcrumbItem {
-  label: string;
-  path: string;
-}
 
-interface BreadcrumbProps {
-  baseLabel?: string; // Texto para la página base, como "Inicio"
-}
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ baseLabel = 'Inicio' }) => {
   const location = useLocation();
