@@ -38,8 +38,8 @@ const PLP: React.FC = () => {
                     <section className="flex-1">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                             <span>{filteredProducts.length} resultados de {optionName}</span>
-                            <select className="border p-2 mt-4 md:mt-0">
-                                <option value="" disabled selected>Ordenar por</option>
+                            <select className="border p-2 mt-4 md:mt-0" defaultValue="">
+                                <option value="" disabled>Ordenar por</option>
                                 <option value="relevancia">Relevancia</option>
                                 <option value="fecha">Fecha de carga</option>
                                 <option value="precio-asc">Precio menor a mayor</option>
