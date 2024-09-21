@@ -1,7 +1,9 @@
+import { importImage } from '../utils/importImage';
+
 export const products = [
     {
         optionId: 1,
-        image: '/img/plp/producto-1.png',
+        image: importImage("producto-1.png"),
         name: 'Computador Portátil HP 14" Pulgadas Ep1001la',
         rating: 4,
         description: 'Intel Core Ultra 5 - RAM 8GB - Disco SSD 512 GB - Plata',
@@ -10,7 +12,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-1.png',
+        image: importImage("laptod-1.png"),
         name: 'Computador Portátil LENOVO 15,6" Pulgadas IdeaPad Slim 3',
         rating: 3,
         description: 'Táctil - Intel Core i5 - RAM 8GB - Disco SSD 512GB',
@@ -19,7 +21,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-2.png',
+        image: importImage("laptod-2.png"),
         name: 'Computador Portátil ASUS Vivobook 16" Pulgadas X1605ZA',
         rating: 2,
         description: 'Intel Core i5 - RAM 16GB - Disco SSD 512 GB - Negro',
@@ -28,7 +30,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-3.png',
+        image: importImage("laptod-3.png"),
         name: 'Computador Portátil LENOVO IdeaPad Slim 5 14" Pulgadas 14IAH8',
         rating: 4,
         description: 'Intel Core i5 - RAM 16GB - Disco SSD 512GB - Gris',
@@ -37,7 +39,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-4.png',
+        image: importImage("laptod-4.png"),
         name: 'MacBook Air de 13" Pulgadas MGN63LA/A',
         rating: 1,
         description: 'Chip M1 RAM 8GB Disco Estado Solido 256 GB - Gris espacial',
@@ -46,7 +48,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-5.png',
+        image: importImage("laptod-5.png"),
         name: 'Computador Portátil ASUS Vivobook Go 15.6" Pulgadas E1504FA',
         rating: 5,
         description: '- AMD Ryzen 5 - RAM 8GB - Disco SSD 1 TB -',
@@ -55,7 +57,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-6.png',
+        image: importImage("laptod-6.png"),
         name: 'Computador Portátil ASUS Vivobook Go 15.6" Pulgadas E1504GA',
         rating: 5,
         description: '- Intel Core i3 - RAM 8GB - Disco SSD 512 GB SSD - Plateado',
@@ -64,7 +66,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-7.png',
+        image: importImage("laptod-7.png"),
         name: 'Computador Portátil ACER ASPIRE GO 15.6" Pulgadas 370J',
         rating: 3,
         description: '- Intel Core i3 - RAM 16GB - Disco SSD 1TB - Azul',
@@ -73,7 +75,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-8.png',
+        image: importImage("laptod-8.png"),
         name: 'Computador Portátil ACER ASPIRE 5 15.6" Pulgadas 54XV',
         rating: 2,
         description: '- Intel Core i5 - RAM 16GB - Disco SSD 512GB - Azul',
@@ -82,7 +84,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-9.png',
+        image: importImage("laptod-9.png"),
         name: 'Computador Portátil HP 14" Pulgadas EP0027la',
         rating: 4,
         description: '- Intel Core i3 - RAM 8GB- Disco SSD 512 GB - Plateado',
@@ -91,7 +93,7 @@ export const products = [
     },
     {
         optionId: 1,
-        image: '/img/plp/laptod-10.png',
+        image: importImage("laptod-10.png"),
         name: 'Computador Portátil Gamer Victus HP 15,6" Pulgadas Fa0000la',
         rating: 5,
         description: 'Intel Core I5- RAM 16GB - Disco SSD 512GB - Azul',
