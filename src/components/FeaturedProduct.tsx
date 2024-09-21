@@ -5,7 +5,7 @@ import { formatCurrency } from '../utils/formatCurrency';
 
 const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount, pdpLink }) => {
   return (
-    <div className="bg-zinc-100 rounded-lg shadow-md flex flex-col items-center p-4 hover:shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform">
+    <div className="bg-zinc-100 rounded-lg shadow-md flex flex-col justify-between items-center p-4 hover:shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform h-full">
       <a href={pdpLink}>
         <img src={importImage(image)} alt={name} className="w-full h-48 object-cover" />
       </a>
