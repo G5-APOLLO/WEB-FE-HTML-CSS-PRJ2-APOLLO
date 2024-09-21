@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/index.css';
 import { Home } from "./pages/Home";
-import PLP from "./pages/Plp"
+import PLP from "./pages/plp"
 import { Routes, Route } from "react-router-dom";
 import ComingSoon from "./pages/ComingSoon";
 
