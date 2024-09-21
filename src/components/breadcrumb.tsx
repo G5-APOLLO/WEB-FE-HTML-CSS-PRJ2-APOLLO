@@ -2,8 +2,6 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BreadcrumbItem, BreadcrumbProps } from '../types/BreadCrumbs.type';
 
-
-
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ baseLabel = 'Inicio' }) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
