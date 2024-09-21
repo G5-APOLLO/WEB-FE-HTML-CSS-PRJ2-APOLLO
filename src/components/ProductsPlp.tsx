@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductProps } from '../types/product-plp-props';
+import { ProductProps } from '../types/ProductPlp.type';
 
 
 const Product: React.FC<ProductProps> = ({ image, name, rating, description, normalPrice, discountedPrice }) => {
