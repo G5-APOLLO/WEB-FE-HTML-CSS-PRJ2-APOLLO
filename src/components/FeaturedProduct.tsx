@@ -1,18 +1,7 @@
 import React from 'react';
 import { importImage } from '../utils/importImage';
-
-interface ProductProps {
-  id: number;
-  name: string;
-  image: string;
-  normalPrice: number;
-  discountedPrice: number;
-  discount: number;
-  pdpLink: string;
-}
-const formatCurrency = (value: number): string => {
-  return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
-};
+import { ProductProps } from '../types/Product.type';
+import { formatCurrency } from '../utils/formatCurrency';
 
 const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount, pdpLink }) => {
   return (
