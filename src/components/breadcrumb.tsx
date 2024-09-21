@@ -12,13 +12,25 @@ interface BreadcrumbProps {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ baseLabel = 'Inicio' }) => {
   const location = useLocation();
+  const query = new URLSearchParams(location.search);
 
-  // Generar las migas de pan dinámicamente según la ruta actual
-  const breadcrumbItems: BreadcrumbItem[] = location.pathname.split('/').filter(Boolean).map((path, index, arr) => {
-    const routeTo = `/${arr.slice(0, index + 1).join('/')}`;
-    const label = path.charAt(0).toUpperCase() + path.slice(1);
-    return { label, path: routeTo };
-  });
+  // Obtener los parámetros de la URL
+  const optionCategory = query.get('optionCategory');
+  const optionName = query.get('optionName');
+
+  // Construir la jerarquía de rutas dinámicamente basada en los parámetros
+  const breadcrumbItems: BreadcrumbItem[] = [];
+
+  if (optionCategory) {
+    breadcrumbItems.push({ label: optionCategory, path: `/${optionCategory.toLowerCase()}` });
+  }
+
+  if (optionCategory && optionName) {
+    breadcrumbItems.push({
+      label: optionName,
+      path: `/${optionCategory.toLowerCase()}/${optionName.toLowerCase().replace(/\s+/g, '-')}/plp`
+    });
+  }
 
   return (
     <nav className="bg-gray-100 py-3 px-5 rounded-md mb-4 mt-4 inline-block mx-4"> {/* Margen simétrico en ambos lados */}
