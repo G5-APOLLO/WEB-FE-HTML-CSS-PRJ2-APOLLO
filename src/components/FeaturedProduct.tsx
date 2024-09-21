@@ -2,6 +2,7 @@ import React from 'react';
 import { importImage } from '../utils/importImage';
 import { ProductProps } from '../types/Product.type';
 import { formatCurrency } from '../utils/formatCurrency';
+import { Link } from 'react-router-dom';
 
 const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount, pdpLink }) => {
   return (
@@ -14,9 +15,13 @@ const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, dis
         <p className="text-gray-500 line-through">{formatCurrency(normalPrice)}</p>
         <p className="text-red-500 font-bold">{formatCurrency(discountedPrice)} ({discount}% off)</p>
       </div>
-      <button className="mt-4 bg-zinc-600 text-white px-4 py-2 rounded hover:bg-neutral-700">
-        Add to Cart
-      </button>
+
+
+      <Link to="/#">
+        <button className="mt-4 bg-zinc-600 text-white px-4 py-2 rounded hover:bg-neutral-700">
+          Add to Cart
+        </button>
+      </Link>
     </div>
   );
 };
