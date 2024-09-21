@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Product from '../components/products-plp';
-import Filter from '../components/filters';
+import Product from '../components/ProductsPlp';
+import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
-import { products } from '../utils/products-json-plp';
-import { filters } from '../utils/filters-data';
+import { products } from '../data/Products.data';
+import { filters } from '../data/Filters.data';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);

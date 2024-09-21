@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import { Subheader } from "../components/Subheader";
-import { menuItems } from "../utils/data";
-import Breadcrumb from "../components/breadcrumb";
+import { menuItems } from "../data/Subheader.data.ts";
+import Breadcrumb from "../components/Breadcrumb.tsx";
 
 export const Main = ({ children }: { children: React.ReactNode }) => {
   return (
