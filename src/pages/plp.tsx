@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
@@ -14,15 +14,34 @@ const PLP: React.FC = () => {
     const query = useQuery();
     const optionId = query.get('optionId');
     const optionName = query.get('optionName');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     console.log('optionId:', optionId);
     console.log('optionName:', optionName);
 
-    // Filter products based on optionId
+    // filter products
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
 
-    // Filter filters based on optionId
+    // operation for pagination
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const indexOfLastProduct = currentPage * itemsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    // filter filters
     const filteredFilters = filters.filter(filter => filter.optionIDfilter === Number(optionId));
+
+    // for scrolling to top
+    const handlePageChange = (page: number) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     return (
         <Main>
@@ -46,9 +65,42 @@ const PLP: React.FC = () => {
                                 <option value="precio-desc">Precio mayor a menor</option>
                             </select>
                         </div>
-                        {filteredProducts.map((product, index) => (
+                        {currentProducts.map((product, index) => (
                             <Product key={index} {...product} />
                         ))}
+                        <div className="flex justify-center mt-10">
+                            <nav className="flex space-x-2">
+                                {currentPage > 1 && (
+                                    <button
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        className="px-4 py-2 rounded-lg border bg-white text-gray-800 border-gray-300 hover:bg-gray-300"
+                                    >
+                                        Anterior
+                                    </button>
+                                )}
+                                {Array.from({ length: totalPages }, (_, index) => (
+                                    <button
+                                        key={index + 1}
+                                        onClick={() => handlePageChange(index + 1)}
+                                        className={`px-4 py-2 rounded-lg border ${
+                                            currentPage === index + 1
+                                                ? 'bg-[#36382E] text-white border-gray-800'
+                                                : 'bg-white text-gray-800 border-gray-300'
+                                        } hover:bg-gray-300`}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+                                {currentPage < totalPages && (
+                                    <button
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        className="px-4 py-2 rounded-lg border bg-white text-gray-800 border-gray-300 hover:bg-gray-300"
+                                    >
+                                        Siguiente
+                                    </button>
+                                )}
+                            </nav>
+                        </div>
                     </section>
                 </div>
             </div>
