@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+# WEB-FE-HTML-CSS-PRJ2-APOLLO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**[Visita el proyecto en GitHub Pages](https://g5-apollo.github.io/WEB-FE-HTML-CSS-PRJ2-APOLLO/)**
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Proyecto de migración de una maqueta HTML/CSS a un proyecto React.js con TypeScript. Implementación de componentes reutilizables y diseño responsivo, siguiendo la metodología Scrum.
 
-## Expanding the ESLint configuration
+## Historias de Usuario Implementadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **HU2005:** Estructura inicial del proyecto.
+- **HU2006:** Página de inicio - Header.
+- **HU2007:** Subheader y menú de navegación.
+- **HU2008:** Footer.
+- **HU2009:** Breadcrumb.
+- **HU2010:** Imágenes promocionales.
+- **HU2011:** Productos destacados.
+- **HU2012:** Banner publicitario.
+- **HU2013:** PLP - Lista de productos.
+- **HU2014:** PLP - Filtros.
 
-- Configure the top-level `parserOptions` property like this:
+## Requisitos
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Node.js v14 o superior
+- npm o yarn
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Instrucciones para Contribuir
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Crear un branch para cada historia de usuario:
+   ```bash
+   git checkout -b feature/HU2006-header
