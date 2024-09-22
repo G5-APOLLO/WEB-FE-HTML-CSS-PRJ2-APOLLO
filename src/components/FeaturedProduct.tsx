@@ -5,7 +5,7 @@ import { formatCurrency } from '../utils/formatCurrency';
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount, pdpLink }) => {
+const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount}) => {
   return (
     <div className="bg-zinc-100 rounded-lg shadow-md flex flex-col justify-between items-center p-4 hover:shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform h-full">
       <div>

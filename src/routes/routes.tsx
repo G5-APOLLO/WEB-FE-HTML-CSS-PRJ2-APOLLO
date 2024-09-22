@@ -1,14 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../pages/Home";
 import PLP from "../pages/plp";
+import ComingSoon from "../pages/ComingSoon";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: ``,
+      element: <Home />,
+    },
+    {
+      path: `/plp`,
+      element: <PLP />,
+    },
+    {
+      path: `/pdp`,
+      element: <ComingSoon />, // Placeholder 
+    },
+    {
+      path: `/cart`,
+      element: <ComingSoon />, // Placeholder 
+    },
+  ],
   {
-    path: "/WEB-FE-HTML-CSS-PRJ2-APOLLO",
-    element: <Home />,
-  },
-  {
-    path: "/WEB-FE-HTML-CSS-PRJ2-APOLLO/plp",
-    element: <PLP />,
+    basename: "/WEB-FE-HTML-CSS-PRJ2-APOLLO", 
   }
-]);
+);

@@ -466,6 +466,7 @@ export const products = [
         name: 'iPhone 16 Pro',
         rating: 0,
         description: '128 GB Titanio Negro',
+        normalPrice: '',
         discountedPrice: '$5.799.010',
     }, 
     {
@@ -483,6 +484,7 @@ export const products = [
         name: 'Celular SAMSUNG Galaxy Z Flip6 + Cover',
         rating: 5,
         description: '256GB 5G Plateado',
+        normalPrice: '',
         discountedPrice: '$5.999.990',
     }, 
     {
@@ -491,6 +493,7 @@ export const products = [
         name: 'iPhone 13',
         rating: 3,
         description: '128GB Azul Medianoche',
+        normalPrice: '',
         discountedPrice: '$2.869.010',
     }, 
     {
@@ -553,6 +556,7 @@ export const products = [
         name: 'Apple Watch SE GPS de 44 mm Caja de Aluminio en Azul Medianoche',
         rating: 2,
         description: 'Correa Deportiva Azul Medianoche Talla S|M',
+        normalPrice: '',
         discountedPrice: '$1.559.010',
     }, 
     {
@@ -579,6 +583,7 @@ export const products = [
         name: 'Reloj HUAWEI GT4',
         rating: 5,
         description: '46 mm Negro',
+        normalPrice: '',
         discountedPrice: '$799.900',
     }, 
     {
@@ -614,6 +619,7 @@ export const products = [
         name: 'Mesa de Centro MADERKIT',
         rating: 2,
         description: 'Lubeck Niebla',
+        normalPrice: '',
         discountedPrice: '$279.900',
     }, 
     {
@@ -712,6 +718,7 @@ export const products = [
         name: 'Olla a Presión UNIVERSAL',
         rating: 3,
         description: '6 Litros Acero Inoxidable',
+        normalPrice: '',
         discountedPrice: '$399.900',
     }, 
     {
@@ -729,6 +736,7 @@ export const products = [
         name: 'Toalla de Cuerpo CANNON Sasha',
         rating: 4,
         description: '70 x 140 cm / 500 grms Blanca',
+        normalPrice: '',
         discountedPrice: '$59.900',
     }, 
     {
@@ -737,6 +745,7 @@ export const products = [
         name: 'Bata de Baño Mujer FATELARES Verano',
         rating: 5,
         description: '320 grms Blanca',
+        normalPrice: '',
         discountedPrice: '$88.900',
     }, 
     {
@@ -745,6 +754,7 @@ export const products = [
         name: 'Espejo Rectangular FREE HOME',
         rating: 4,
         description: 'Con Joyero de Bambú',
+        normalPrice: '',
         discountedPrice: '$49.900',
     }, 
     {
@@ -753,6 +763,7 @@ export const products = [
         name: 'Dispensador de jabón URUYEN',
         rating: 3,
         description: 'Legacy Blanco',
+        normalPrice: '',
         discountedPrice: '$34.900',
     }, 
     {
@@ -761,6 +772,7 @@ export const products = [
         name: 'Recipiente para Almacenar Jabón SANREMO',
         rating: 0,
         description: 'Con Rollo Quita Pelusas',
+        normalPrice: '',
         discountedPrice: '$31.900',
     }, 
 ];
