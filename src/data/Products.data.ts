@@ -709,7 +709,7 @@ export const products = [
         name: 'Olla a Presión IMUSA 7 Litros SecuryPlus',
         rating: 5,
         description: 'Cierre Interno',
-        normalPrice: '',
+        normalPrice: '$159.900',
         discountedPrice: '$109.900',
     }, 
     {
@@ -727,7 +727,7 @@ export const products = [
         name: 'Sartén 30 cm IMUSA Natural Stone',
         rating: 4,
         description: 'Tapa de Vidrio',
-        normalPrice: '',
+        normalPrice: '$159.900',
         discountedPrice: '$109.900',
     }, 
     {
