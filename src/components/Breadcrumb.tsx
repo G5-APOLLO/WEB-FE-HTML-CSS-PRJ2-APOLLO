@@ -14,7 +14,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ baseLabel = 'Inicio' }) => {
   const breadcrumbItems: BreadcrumbItem[] = [];
 
   if (optionCategory) {
-    breadcrumbItems.push({ label: optionCategory, path: `` });
+    breadcrumbItems.push({ label: optionCategory, path: ``});
   }
 
   if (optionCategory && optionName) {
