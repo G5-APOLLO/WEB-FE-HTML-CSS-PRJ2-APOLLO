@@ -3,6 +3,10 @@ import { Subheader } from "../components/Subheader";
 import { menuItems } from "../data/Subheader.data.ts";
 import Breadcrumb from "../components/Breadcrumb.tsx";
 import Footer from '../components/Footer';
+import Banner from '../components/Banner';
+import { bannerImages } from '../data/BannerImages.data';
+
+
 
 export const Main = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,7 +18,11 @@ export const Main = ({ children }: { children: React.ReactNode }) => {
         <main className="flex-grow">
           {children}
         </main>
-        <Footer companyName="CLICKY S.A.S." year={2022} nit="123456789-0" />
+        <Banner
+        image={bannerImages[0].image}
+        imageResponsive={bannerImages[0].imageResponsive}
+        alt={bannerImages[0].alt}/>
+        <Footer />
       </div>
     </>
   );
