@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
     <footer className="bg-custom-radial-header text-white p-6">
       <div className="footer-top flex flex-col md:flex-row justify-between items-center border-b border-white pb-4 mb-4">
         <div className="footer-info mb-4 md:mb-0">
-          <p>© 2022 CLICKY S.A.S.</p>
+          <p>© 2022 CLICKY S.A.S</p>
           <p>NIT: 123456789-0</p>
         </div>
         <div className="footer-social flex mb-4 md:mb-0">
