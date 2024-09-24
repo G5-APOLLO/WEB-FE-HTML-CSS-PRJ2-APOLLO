@@ -22,7 +22,4 @@ export const router = createBrowserRouter(
       element: <ComingSoon />, // Placeholder 
     },
   ],
-  {
-    basename: "/WEB-FE-HTML-CSS-PRJ2-APOLLO", 
-  }
 );
