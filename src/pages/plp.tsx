@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
@@ -6,43 +6,20 @@ import { Main } from "../layout/Main";
 import { filters } from '../data/Filters.data';
 import ErrorMessage from '../components/Error';
 import Loading from '../components/Loading';
+import { useProducts } from '../hooks/useProductsQuery';
 
-const useQuery = () => {
+const useQueryParams = () => {
     return new URLSearchParams(useLocation().search);
 };
 
 const PLP: React.FC = () => {
-    const query = useQuery();
+    const query = useQueryParams();
     const optionId = query.get('optionId');
     const optionName = query.get('optionName');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    const [products, setProducts] = useState<any[]>([]); 
-    const [loading, setLoading] = useState(true); 
-    const [loadingMessage, setLoadingMessage] = useState('');
-    const [error, setError] = useState(false); 
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                setLoadingMessage('Cargando productos...'); 
-                const response = await fetch('https://web-fe-prj2-api-apollo.onrender.com/plp');
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta de la red');
-                }
-                const data = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                setLoadingMessage('Error al cargar los productos...');
-                setError(true);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchProducts();
-    }, []);
+    const { data: products = [], isLoading, isError } = useProducts();
 
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -84,10 +61,10 @@ const PLP: React.FC = () => {
                             </select>
                         </div>
                         <div className="text-center">
-                            {loading ? (
-                                <Loading loadingMessage={loadingMessage} />
-                            ) : error ? ( 
-                                <ErrorMessage Error_Message={"Error al cargar productos"} />    
+                            {isLoading ? (
+                                <Loading loadingMessage="Cargando productos..." />
+                            ) : isError ? (
+                                <ErrorMessage Error_Message="Error al cargar productos" />
                             ) : (
                                 currentProducts.map((product) => (
                                     <Link
