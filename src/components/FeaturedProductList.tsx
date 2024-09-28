@@ -4,14 +4,16 @@ import FeaturedProduct from './FeaturedProduct';
 import { useFeaturedProducts } from '../hooks/useFeaturedProducts';
 import { Link } from 'react-router-dom';
 import { ProductProps } from '../types/Product.type';
+import Spinner from './Spinner';
+import ErrorComponent from './ErrorComponent';
 
 
 const FeaturedProductsList: React.FC = () => {
 
   const { data, error, isLoading } = useFeaturedProducts();
-  console.log(data);
-  if (isLoading) return (<p> Cargando </p>);
-  if (error) return (<p>Error</p>);
+
+  if (isLoading) return <Spinner />;
+  if (error) return <ErrorComponent message="Failed to load featured products." />;
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
