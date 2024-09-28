@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
-import { products } from '../data/Products.data';
 import { filters } from '../data/Filters.data';
+import ErrorMessage from '../components/Error';
+import Loading from '../components/Loading';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -16,20 +17,40 @@ const PLP: React.FC = () => {
     const optionName = query.get('optionName');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+    const [products, setProducts] = useState<any[]>([]); 
+    const [loading, setLoading] = useState(true); 
+    const [loadingMessage, setLoadingMessage] = useState('');
+    const [error, setError] = useState(false); 
 
-    // filter products
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                setLoadingMessage('Cargando productos...'); 
+                const response = await fetch('https://web-fe-prj2-api-apollo.onrender.com/plp');
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta de la red');
+                }
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                setLoadingMessage('Error al cargar los productos...');
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
-
-    // operation for pagination
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-    // filter filters
     const filteredFilters = filters.filter(filter => filter.optionIDfilter === Number(optionId));
 
-    // for scrolling to top
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
@@ -62,9 +83,23 @@ const PLP: React.FC = () => {
                                 <option value="precio-desc">Precio mayor a menor</option>
                             </select>
                         </div>
-                        {currentProducts.map((product, index) => (
-                            <Product key={index} {...product} />
-                        ))}
+                        <div className="text-center">
+                            {loading ? (
+                                <Loading loadingMessage={loadingMessage} />
+                            ) : error ? ( 
+                                <ErrorMessage Error_Message={"Error al cargar productos"} />    
+                            ) : (
+                                currentProducts.map((product) => (
+                                    <Link
+                                        to={`/pdp?optionId=${product.id}`}
+                                        className="block"
+                                        key={product.id}
+                                    >
+                                        <Product {...product} />
+                                    </Link>
+                                ))
+                            )}
+                        </div>
                         <div className="flex justify-center mt-10">
                             <nav className="flex space-x-2">
                                 {currentPage > 1 && (
