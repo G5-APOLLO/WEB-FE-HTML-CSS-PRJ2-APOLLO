@@ -60,7 +60,7 @@ const PLP: React.FC = () => {
                                 <option value="precio-desc">Precio mayor a menor</option>
                             </select>
                         </div>
-                        <div className="text-center">
+                        <div className="">
                             {isLoading ? (
                                 <Loading loadingMessage="Cargando productos..." />
                             ) : isError ? (
