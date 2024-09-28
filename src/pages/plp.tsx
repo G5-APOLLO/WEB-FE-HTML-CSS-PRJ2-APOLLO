@@ -17,9 +17,6 @@ const PLP: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    console.log('optionId:', optionId);
-    console.log('optionName:', optionName);
-
     // filter products
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
 
