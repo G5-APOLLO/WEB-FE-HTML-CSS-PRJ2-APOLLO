@@ -4,9 +4,9 @@ import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
 import { filters } from '../data/Filters.data';
-import ErrorMessage from '../components/Error';
-import Loading from '../components/Loading';
+import ErrorComponent from '../components/ErrorComponent';
 import { useProducts } from '../hooks/useProductsQuery';
+import Spinner from '../components/Spinner';
 
 const useQueryParams = () => {
     return new URLSearchParams(useLocation().search);
@@ -62,9 +62,9 @@ const PLP: React.FC = () => {
                         </div>
                         <div className="">
                             {isLoading ? (
-                                <Loading loadingMessage="Cargando productos..." />
+                                <Spinner/>
                             ) : isError ? (
-                                <ErrorMessage Error_Message="Error al cargar productos" />
+                                <ErrorComponent message="Error al cargar productos" />
                             ) : (
                                 currentProducts.map((product) => (
                                     <Link
