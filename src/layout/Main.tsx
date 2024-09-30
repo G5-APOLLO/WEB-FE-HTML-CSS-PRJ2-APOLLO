@@ -19,9 +19,9 @@ export const Main = ({ children }: { children: React.ReactNode }) => {
           {children}
         </main>
         <Banner
-        image={bannerImages[0].image}
-        imageResponsive={bannerImages[0].imageResponsive}
-        alt={bannerImages[0].alt}/>
+          image={bannerImages[0].image}
+          imageResponsive={bannerImages[0].imageResponsive}
+          alt={bannerImages[0].alt} />
         <Footer />
       </div>
     </>
