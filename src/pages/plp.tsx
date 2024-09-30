@@ -1,32 +1,40 @@
-import React, { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
-import { filters } from '../data/Filters.data';
-import ErrorComponent from '../components/ErrorComponent';
-import { useProducts } from '../hooks/useProductsQuery';
+import { products } from '../data/Products.data';
+import { useGetFilters } from '../hooks/useGetFilters';
 import Spinner from '../components/Spinner';
+import ErrorComponent from '../components/ErrorComponent';
 
 const useQueryParams = () => {
     return new URLSearchParams(useLocation().search);
 };
 
+
+
 const PLP: React.FC = () => {
-    const query = useQueryParams();
-    const optionId = query.get('optionId');
+    const query = useQuery();
+    const optionId = query.get('optionId') ?? ''; 
     const optionName = query.get('optionName');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const { data: products = [], isLoading, isError } = useProducts();
+    const { isLoading, isSuccess, isError, refetch, data: filters } = useGetFilters(optionId);
+
+    useEffect(() => {
+        refetch();
+    }, [optionId, refetch]);
+
+    // filter products
+    const filteredProducts = products.filter(product => product.optionId === Number(optionId));
 
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-    const filteredFilters = filters.filter(filter => filter.optionIDfilter === Number(optionId));
 
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
@@ -45,10 +53,22 @@ const PLP: React.FC = () => {
                 <div className="flex flex-wrap mt-6">
                     <aside className="w-full md:w-1/6 mb-6 md:mb-0 md:mr-6 mt-16">
                         <h2 className="text-2xl font-bold mb-6">Filtros</h2>
-                        {filteredFilters.map((filter, index) => (
-                            <Filter key={index} title={filter.title} options={filter.options} />
+                        {isLoading && (
+                            <div className="flex flex-col items-center text-gray-500">
+                                Cargando filtros...
+                                <Spinner />
+                            </div>
+                        )}
+                        {isError && (
+                            <div className="flex justify-center">
+                                <ErrorComponent message="Error al cargar filtros" />
+                            </div>
+                        )}
+                        {!isLoading && !isError && isSuccess && filters && filters.map((filter, index) => (
+                            <Filter key={index} title={filter.title} options={filter.options}  />
                         ))}
                     </aside>
+
                     <section className="flex-1">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                             <span>{filteredProducts.length} resultados de {optionName}</span>
