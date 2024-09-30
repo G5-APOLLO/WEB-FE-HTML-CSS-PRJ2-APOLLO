@@ -8,8 +8,7 @@ import { useGetFilters } from '../hooks/useGetFilters';
 import Spinner from '../components/Spinner';
 import ErrorComponent from '../components/ErrorComponent';
 
-
-const useQuery = () => {
+const useQueryParams = () => {
     return new URLSearchParams(useLocation().search);
 };
 
@@ -18,7 +17,6 @@ const useQuery = () => {
 const PLP: React.FC = () => {
     const query = useQuery();
     const optionId = query.get('optionId') ?? ''; 
-
     const optionName = query.get('optionName');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -32,15 +30,12 @@ const PLP: React.FC = () => {
     // filter products
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
 
-    // operation for pagination
+    const filteredProducts = products.filter(product => product.optionId === Number(optionId));
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
     const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
- 
-
-    // for scrolling to top
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
@@ -85,9 +80,23 @@ const PLP: React.FC = () => {
                                 <option value="precio-desc">Precio mayor a menor</option>
                             </select>
                         </div>
-                        {currentProducts.map((product, index) => (
-                            <Product key={index} {...product} />
-                        ))}
+                        <div className="">
+                            {isLoading ? (
+                                <Spinner/>
+                            ) : isError ? (
+                                <ErrorComponent message="Error al cargar productos" />
+                            ) : (
+                                currentProducts.map((product) => (
+                                    <Link
+                                        to={`/pdp?optionId=${product.id}&optionId=${product.name}`}
+                                        className="block"
+                                        key={product.id}
+                                    >
+                                        <Product {...product} />
+                                    </Link>
+                                ))
+                            )}
+                        </div>
                         <div className="flex justify-center mt-10">
                             <nav className="flex space-x-2">
                                 {currentPage > 1 && (

@@ -39,5 +39,4 @@ const ErrorComponent: React.FC<ErrorComponentProps> = ({ message }) => {
     </div>
   );
 };
-
 export default ErrorComponent;
