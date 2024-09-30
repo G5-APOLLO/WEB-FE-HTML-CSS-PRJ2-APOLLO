@@ -4,8 +4,8 @@ import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
 import { products } from '../data/Products.data';
-import { filters } from '../data/Filters.data';
 import { useGetFilters } from '../hooks/useGetFilters';
+
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -18,8 +18,8 @@ const PLP: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
+    const { isLoading, isSuccess, isError, data: filters } = useGetFilters(optionId ?? '');
 
-    const { data: filters } = useGetFilters(optionId ?? '');
     // filter products
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
 
@@ -47,6 +47,14 @@ const PLP: React.FC = () => {
             <div className="max-w-screen-xl mx-auto px-6 py-10 font-poppins">
                 <h2 className="text-3xl font-bold mb-6">{optionName}</h2>
                 <div className="flex flex-wrap mt-6">
+                    <aside className="w-full md:w-1/6 mb-6 md:mb-0 md:mr-6 mt-16">
+                        <h2 className="text-2xl font-bold mb-6">Filtros</h2>
+                        {isLoading && <div className="text-gray-500">Loading filters...</div>}
+                        {isError && <div className="text-red-500">Error loading filters. Please try again.</div>}
+                        {!isLoading && !isError && isSuccess && filters && filters.map((filter, index) => (
+                            <Filter key={index} title={filter.title} options={filter.options} />
+                        ))}
+                    </aside>
 
                     <section className="flex-1">
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
