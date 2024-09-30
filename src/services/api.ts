@@ -1,6 +1,6 @@
 // export const LOCAL_BASE_URL = "http://localhost:3000";
 export const REMOTE_BASE_URL =
-  "http://localhost:000";
+  "https://web-fe-prj2-api-apollo.onrender.com";
 
 export const fetcher = async (endpoint: string, options: RequestInit = {}) => {
   const isFormData = options.body instanceof FormData;

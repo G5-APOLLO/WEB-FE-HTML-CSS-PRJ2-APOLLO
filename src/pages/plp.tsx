@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
@@ -13,14 +13,21 @@ const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
+
+
 const PLP: React.FC = () => {
     const query = useQuery();
-    const optionId = query.get('optionId');
+    const optionId = query.get('optionId') ?? ''; 
+
     const optionName = query.get('optionName');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const { isLoading, isSuccess, isError, data: filters } = useGetFilters(optionId ?? '');
+    const { isLoading, isSuccess, isError, refetch, data: filters } = useGetFilters(optionId);
+
+    useEffect(() => {
+        refetch();
+    }, [optionId, refetch]);
 
     // filter products
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
@@ -51,10 +58,19 @@ const PLP: React.FC = () => {
                 <div className="flex flex-wrap mt-6">
                     <aside className="w-full md:w-1/6 mb-6 md:mb-0 md:mr-6 mt-16">
                         <h2 className="text-2xl font-bold mb-6">Filtros</h2>
-                        {isLoading && <div className="text-gray-500">Cargando filtros...<Spinner/></div> }
-                        {isError && <ErrorComponent message="Error al cargar filtros"/>}
+                        {isLoading && (
+                            <div className="flex flex-col items-center text-gray-500">
+                                Cargando filtros...
+                                <Spinner />
+                            </div>
+                        )}
+                        {isError && (
+                            <div className="flex justify-center">
+                                <ErrorComponent message="Error al cargar filtros" />
+                            </div>
+                        )}
                         {!isLoading && !isError && isSuccess && filters && filters.map((filter, index) => (
-                            <Filter key={index} title={filter.title} options={filter.options} />
+                            <Filter key={index} title={filter.title} options={filter.options}  />
                         ))}
                     </aside>
 
