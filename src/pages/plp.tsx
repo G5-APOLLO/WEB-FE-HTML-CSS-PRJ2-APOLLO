@@ -5,6 +5,8 @@ import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
 import { products } from '../data/Products.data';
 import { useGetFilters } from '../hooks/useGetFilters';
+import Spinner from '../components/Spinner';
+import ErrorComponent from '../components/ErrorComponent';
 
 
 const useQuery = () => {
@@ -49,8 +51,8 @@ const PLP: React.FC = () => {
                 <div className="flex flex-wrap mt-6">
                     <aside className="w-full md:w-1/6 mb-6 md:mb-0 md:mr-6 mt-16">
                         <h2 className="text-2xl font-bold mb-6">Filtros</h2>
-                        {isLoading && <div className="text-gray-500">Loading filters...</div>}
-                        {isError && <div className="text-red-500">Error loading filters. Please try again.</div>}
+                        {isLoading && <div className="text-gray-500">Cargando filtros...<Spinner/></div> }
+                        {isError && <ErrorComponent message="Error al cargar filtros"/>}
                         {!isLoading && !isError && isSuccess && filters && filters.map((filter, index) => (
                             <Filter key={index} title={filter.title} options={filter.options} />
                         ))}
