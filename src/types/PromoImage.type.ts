@@ -10,6 +10,7 @@ export interface ProductProps {
 
 
 export interface PromoImageProps   {
+  id :number
   image: string;
   imageResponsive: string;
   alt: string;
