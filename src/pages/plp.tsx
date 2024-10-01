@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Product from '../components/ProductsPlp';
 import Filter from '../components/Filters';
 import { Main } from "../layout/Main";
-import { products } from '../data/Products.data';
 import { useGetFilters } from '../hooks/useGetFilters';
+import { useProducts } from '../hooks/useProductsQuery';
 import Spinner from '../components/Spinner';
 import ErrorComponent from '../components/ErrorComponent';
 
-const useQueryParams = () => {
+const useQuery = () => {
     return new URLSearchParams(useLocation().search);
 };
 
@@ -21,16 +21,17 @@ const PLP: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const { isLoading, isSuccess, isError, refetch, data: filters } = useGetFilters(optionId);
+    const { isLoading: isLoadingFilters, isSuccess: isSuccessFilters, isError: isErrorFilters, refetch, data: filters } = useGetFilters(optionId);
+    const { data: products = [], isLoading: isLoadingProducts, isError: isErrorProducts } = useProducts();
 
     useEffect(() => {
         refetch();
     }, [optionId, refetch]);
 
     // filter products
-    const filteredProducts = products.filter(product => product.optionId === Number(optionId));
 
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
+    
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
@@ -53,18 +54,18 @@ const PLP: React.FC = () => {
                 <div className="flex flex-wrap mt-6">
                     <aside className="w-full md:w-1/6 mb-6 md:mb-0 md:mr-6 mt-16">
                         <h2 className="text-2xl font-bold mb-6">Filtros</h2>
-                        {isLoading && (
+                        {isLoadingFilters && (
                             <div className="flex flex-col items-center text-gray-500">
                                 Cargando filtros...
                                 <Spinner />
                             </div>
                         )}
-                        {isError && (
+                        {isErrorFilters && (
                             <div className="flex justify-center">
                                 <ErrorComponent message="Error al cargar filtros" />
                             </div>
                         )}
-                        {!isLoading && !isError && isSuccess && filters && filters.map((filter, index) => (
+                        {!isLoadingFilters && !isErrorFilters && isSuccessFilters && filters && filters.map((filter, index) => (
                             <Filter key={index} title={filter.title} options={filter.options}  />
                         ))}
                     </aside>
@@ -81,9 +82,9 @@ const PLP: React.FC = () => {
                             </select>
                         </div>
                         <div className="">
-                            {isLoading ? (
+                            {isLoadingProducts ? (
                                 <Spinner/>
-                            ) : isError ? (
+                            ) : isErrorProducts ? (
                                 <ErrorComponent message="Error al cargar productos" />
                             ) : (
                                 currentProducts.map((product) => (
