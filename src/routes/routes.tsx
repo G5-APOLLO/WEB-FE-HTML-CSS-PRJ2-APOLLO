@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../pages/Home";
 import PLP from "../pages/plp";
 import ComingSoon from "../pages/ComingSoon";
+import CartPage from '../pages/Cart';
 
 export const router = createBrowserRouter(
   [
@@ -19,7 +20,7 @@ export const router = createBrowserRouter(
     },
     {
       path: `/cart`,
-      element: <ComingSoon />, // Placeholder 
+      element: <CartPage />, // Placeholder 
     },
   ],
 );
