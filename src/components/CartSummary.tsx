@@ -67,15 +67,15 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
     <aside className="order-summary bg-white p-5 border">
       <h3 className="text-xl mb-4 text-blue-900">Order Summary</h3>
       
-      <div className="summary-item mb-3">
+      <div className="mb-3">
         <span>Subtotal:</span>
         <span> ${subtotal.toLocaleString()}</span>
       </div>
 
       {/* Display individual item discounts */}
       {discountsArray.length > 0 && (
-        <div className="summary-item mb-3">
-          <span>Discounts:</span>
+        <div className="mb-3">
+          <span>Descuentos:</span>
           <ul>
             {discountsArray.map((item, index) => (
               <li key={index}>
@@ -86,27 +86,27 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
         </div>
       )}
 
-      <div className="summary-item mb-3">
-        <span>Total Discounts:</span>
+      <div className="mb-3">
+        <span>Total Descuentos:</span>
         <span> ${totalDiscounts.toLocaleString()}</span>
       </div>
 
-      <div className="summary-item mb-3">
-        <span>Shipping Cost:</span>
+      <div className="mb-3">
+        <span>Costo envió:</span>
         <span> ${shippingCost.toLocaleString()}</span>
       </div>
 
-      <div className="summary-item mb-3">
-        <span>Tax ({(taxRate * 100).toFixed(0)}%):</span>
+      <div className="mb-3">
+        <span>IVA ({(taxRate * 100).toFixed(0)}%):</span>
         <span> ${tax.toLocaleString()}</span>
       </div>
 
-      <div className="summary-total flex justify-between mt-5 font-bold text-lg border-t pt-3">
+      <div className="flex justify-between mt-5 font-bold text-lg border-t pt-3">
         <span>Total:</span>
         <span> ${total.toLocaleString()}</span>
       </div>
 
-      <button className="checkout-btn bg-gray-800 text-white w-full mt-5 py-3 rounded hover:bg-gray-300 hover:text-black">
+      <button className="bg-gray-800 text-white w-full mt-5 py-3 rounded hover:bg-gray-300 hover:text-black">
         Iniciar Pago
       </button>
     </aside>

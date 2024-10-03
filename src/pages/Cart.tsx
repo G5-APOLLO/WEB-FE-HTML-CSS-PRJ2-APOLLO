@@ -69,8 +69,8 @@ const CartPage: React.FC = () => {
         </div>
 
           {/* Order Summary  */}
-            <div className="w-full md:w-1/3 md:ml-4 mt-6 md:mt-0">
-          {!loading && !error && cartItems.length > 0 && <CartSummary cartItems={cartItems} />}
+            <div className="max-w-screen-lg mx-auto md:w-1/3 md:ml-4 mt-[72px]">
+          {!loading && !error  && <CartSummary cartItems={cartItems} />}
         </div>
       </div>
     </Main>
