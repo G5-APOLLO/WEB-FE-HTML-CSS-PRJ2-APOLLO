@@ -18,15 +18,11 @@ const FeaturedProductsList: React.FC = () => {
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
       {data.slice(0, 12).map((product: ProductProps) => (
-        <Link
-          to={`${product.pdpLink}?optionId=${product.id}`}
-          className="block"
-          key={product.id}
-        >
+
           <div className="h-full">
             <FeaturedProduct {...product} />
           </div>
-        </Link>
+
       ))}
     </div>
   );

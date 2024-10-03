@@ -1,79 +1,129 @@
-import React, { useState, useEffect } from 'react';
-import CartItemList from '../components/CartItemList';
-import Spinner from '../components/Spinner';
-import ErrorComponent from '../components/ErrorComponent';
-import { Product } from '../types/CartProduct.type';
-import CartSummary from '../components/CartSummary';
-import { Main } from '../layout/Main';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../stores/cart.store';
+import { removeFromCart, decrementFromCart, clearCart, addToCart } from '../slices/cart.slice'; // Redux actions
+import { formatCurrency } from '../utils/formatCurrency';
+import { Link } from 'react-router-dom'; // Assuming Link for navigation
 
 const CartPage: React.FC = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
 
-  const fetchCartItems = async () => {
-    try {
-      const response = await fetch('https://web-fe-prj2-api-apollo.onrender.com/plp');
-      if (!response.ok) {
-        throw new Error('Error en la respuesta de la API');
-      }
-      const data = await response.json();
 
-      const filteredItems = data.filter((item: Product) => {
-        return [54, 15, 48].includes(item.id);
-      });
-
-      setCartItems(filteredItems);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error al cargar los productos del carrito:', error);
-      setError(true);
-      setLoading(false);
-    }
+  const handleRemoveItem = (id: number) => {
+    dispatch(removeFromCart(id));
   };
 
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
-
-  const updateQuantity = (id: number, newQuantity: number) => {
-    setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity: newQuantity } : item));
+  const handleDecrement = (id: number) => {
+    dispatch(decrementFromCart(id));
   };
 
-  const updateShippingMethod = (id: number, method: string) => {
-    setCartItems(cartItems.map(item => item.id === id ? { ...item, shippingMethod: method } : item));
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
-  const removeItem = (id: number) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.discountedPrice * item.quantity,
+    0
+  );
 
   return (
-    <Main>
-       <div className="p-6 max-w-screen-lg mx-auto flex flex-col md:flex-row">
-        <div className="p-6 max-w-screen-lg mx-auto">
-          <h1 className="text-2xl font-bold mb-4">Carrito de Compras</h1>
+    <div className="p-6 max-w-screen-lg mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
 
-          {loading && <Spinner />}
-
-          {error && <ErrorComponent message="Hubo un error al cargar los productos del carrito." />}
-
-          {!loading && !error && (
-            <CartItemList
-              cartItems={cartItems}
-              updateQuantity={updateQuantity}
-              updateShippingMethod={updateShippingMethod}
-              removeItem={removeItem}
-            />
-          )}
+      {cartItems.length === 0 ? (
+        <div className="text-center">
+          <p>Your cart is empty.</p>
+          <Link to="/" className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">
+            Continue Shopping
+          </Link>
         </div>
+      ) : (
+        <div className="flex flex-col">
+          <div className="mb-4">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 text-left">Product</th>
+                  <th className="py-2 px-4 text-left">Quantity</th>
+                  <th className="py-2 px-4 text-right">Price</th>
+                  <th className="py-2 px-4 text-right">Total</th>
+                  <th className="py-2 px-4 text-right"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((item) => (
+                  <tr key={item.id} className="border-b">
+                    <td className="py-2 px-4 flex items-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-12 h-12 object-cover mr-4"
+                      />
+                      <div>
+                        <p className="font-bold">{item.name}</p>
+                        <p className="text-sm text-gray-600">
+                          {formatCurrency(item.discountedPrice)}
+                        </p>
+                      </div>
+                    </td>
+                    <td className="py-2 px-4">
+                      <div className="flex items-center">
+                        <button
+                          className="bg-gray-300 text-gray-600 px-2 py-1 rounded"
+                          onClick={() => handleDecrement(item.id)}
+                        >
+                          -
+                        </button>
+                        <span className="mx-2">{item.quantity}</span>
+                        <button
+                          className="bg-gray-300 text-gray-600 px-2 py-1 rounded"
+                          onClick={() => dispatch(addToCart(item))}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    <td className="py-2 px-4 text-right">
+                      {formatCurrency(item.discountedPrice)}
+                    </td>
+                    <td className="py-2 px-4 text-right">
+                      {formatCurrency(item.discountedPrice * item.quantity)}
+                    </td>
+                    <td className="py-2 px-4 text-right">
+                      <button
+                        className="bg-red-500 text-white px-2 py-1 rounded"
+                        onClick={() => handleRemoveItem(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-          {/* Order Summary  */}
-            <div className="max-w-screen-lg mx-auto md:w-1/3 md:ml-4 mt-[72px]">
-          {!loading && !error  && <CartSummary cartItems={cartItems} />}
+          <div className="flex justify-between items-center border-t py-4">
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded"
+              onClick={handleClearCart}
+            >
+              Clear Cart
+            </button>
+            <div className="text-right">
+              <p className="text-lg font-bold">Total: {formatCurrency(totalPrice)}</p>
+              <Link
+                to="/checkout"
+                className="mt-2 bg-green-500 text-white px-4 py-2 rounded inline-block"
+              >
+                Proceed to Checkout
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-    </Main>
+      )}
+    </div>
   );
 };
 
