@@ -10,6 +10,8 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ baseLabel = 'Inicio' }) => {
   const optionCategory = query.get('optionCategory');
   const optionName = query.get('optionName');
 
+  const isCartPage = location.pathname === '/cart';
+
   // Construir la jerarquía de rutas dinámicamente basada en los parámetros
   const breadcrumbItems: BreadcrumbItem[] = [];
 
@@ -22,6 +24,10 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ baseLabel = 'Inicio' }) => {
       label: optionName,
       path: `/${optionCategory.toLowerCase()}/${optionName.toLowerCase().replace(/\s+/g, '-')}/plp`
     });
+  }
+
+  if (isCartPage) {
+    breadcrumbItems.push({ label: 'Carrito de Compras', path: `/cart` });
   }
 
   return (

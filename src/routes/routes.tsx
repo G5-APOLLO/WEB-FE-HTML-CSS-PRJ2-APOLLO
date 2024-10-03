@@ -16,11 +16,11 @@ export const router = createBrowserRouter(
     },
     {
       path: `/pdp`,
-      element: <ComingSoon />, // Placeholder 
+      element: <ComingSoon />,
     },
     {
       path: `/cart`,
-      element: <CartPage />, // Placeholder 
+      element: <CartPage />,
     },
   ],
 );

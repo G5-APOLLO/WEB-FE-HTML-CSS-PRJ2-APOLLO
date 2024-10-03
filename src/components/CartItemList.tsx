@@ -8,6 +8,8 @@ interface CartItemListProps {
   removeItem: (id: number) => void;
 }
 
+
+
 const CartItemList: React.FC<CartItemListProps> = ({
   cartItems,
   updateQuantity,
@@ -57,9 +59,9 @@ const CartItemList: React.FC<CartItemListProps> = ({
             <p>Cantidad:</p>
             <select
               name={`quantity${item.id}`}
-              value={item.quantity || 1} // Valor por defecto si no tiene cantidad
+              value={item.quantity || 1}
               onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-              className="mt-2 p-1 border border-gray-300 rounded-md"
+              className="mt-2 p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring focus:ring-blue-200 focus:border-blue-500 hover:shadow-lg transition-shadow duration-300 ease-in-out appearance-none"
             >
               {[1, 2, 3].map(qty => (
                 <option key={qty} value={qty}>{qty}</option>
