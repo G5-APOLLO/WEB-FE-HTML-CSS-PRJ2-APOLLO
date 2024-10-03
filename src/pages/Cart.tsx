@@ -3,6 +3,7 @@ import CartItemList from '../components/CartItemList';
 import Spinner from '../components/Spinner';
 import ErrorComponent from '../components/ErrorComponent';
 import { Product } from '../types/CartProduct.type';
+import CartSummary from '../components/CartSummary';
 import { Main } from '../layout/Main';
 
 const CartPage: React.FC = () => {
@@ -19,7 +20,7 @@ const CartPage: React.FC = () => {
       const data = await response.json();
 
       const filteredItems = data.filter((item: Product) => {
-        return [54, 15, 48].includes(item.id);
+        return [54, 15].includes(item.id);
       });
 
       setCartItems(filteredItems);
@@ -49,21 +50,28 @@ const CartPage: React.FC = () => {
 
   return (
     <Main>
-      <div className="p-6 max-w-screen-lg mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Carrito de Compras</h1>
+       <div className="p-6 max-w-screen-lg mx-auto flex flex-col md:flex-row">
+        <div className="p-6 max-w-screen-lg mx-auto">
+          <h1 className="text-2xl font-bold mb-4">Carrito de Compras</h1>
 
-        {loading && <Spinner />}
+          {loading && <Spinner />}
 
-        {error && <ErrorComponent message="Hubo un error al cargar los productos del carrito." />}
+          {error && <ErrorComponent message="Hubo un error al cargar los productos del carrito." />}
 
-        {!loading && !error && (
-          <CartItemList
-            cartItems={cartItems}
-            updateQuantity={updateQuantity}
-            updateShippingMethod={updateShippingMethod}
-            removeItem={removeItem}
-          />
-        )}
+          {!loading && !error && (
+            <CartItemList
+              cartItems={cartItems}
+              updateQuantity={updateQuantity}
+              updateShippingMethod={updateShippingMethod}
+              removeItem={removeItem}
+            />
+          )}
+        </div>
+
+          {/* Order Summary  */}
+            <div className="w-full md:w-1/3 md:ml-4 mt-6 md:mt-0">
+          {!loading && !error && cartItems.length > 0 && <CartSummary cartItems={cartItems} />}
+        </div>
       </div>
     </Main>
   );
