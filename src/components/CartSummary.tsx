@@ -65,7 +65,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
 
   return (
     <aside className="order-summary bg-white p-5 border">
-      <h3 className="text-xl mb-4 text-blue-900">Order Summary</h3>
+      <h3 className="text-xl mb-4 text-blue-900">Resumen de Compra</h3>
       
       <div className="mb-3">
         <span>Subtotal:</span>
