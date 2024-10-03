@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product } from '../types/CartProduct.type';
+import QuantitySelector from '../components/QuantitySelector';
 
 interface CartItemListProps {
   cartItems: Product[];
@@ -57,16 +58,11 @@ const CartItemList: React.FC<CartItemListProps> = ({
               </label>
             </div>
             <p>Cantidad:</p>
-            <select
-              name={`quantity${item.id}`}
-              value={item.quantity || 1}
-              onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-              className="mt-2 p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:ring focus:ring-blue-200 focus:border-blue-500 hover:shadow-lg transition-shadow duration-300 ease-in-out appearance-none"
-            >
-              {[1, 2, 3].map(qty => (
-                <option key={qty} value={qty}>{qty}</option>
-              ))}
-            </select>
+            <QuantitySelector
+              quantity={item.quantity || 1}
+              maxQuantity={20} // Aquí puedes ajustar el máximo de unidades
+              updateQuantity={(newQuantity) => updateQuantity(item.id, newQuantity)}
+            />
           </div>
           <div className="text-lg font-bold text-gray-700 mt-4 lg:mt-0">{item.discountedPrice || item.normalPrice}</div>
           <div className="ml-0 lg:ml-5 mt-4 lg:mt-0">
