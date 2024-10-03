@@ -66,7 +66,7 @@ const CartItemList: React.FC<CartItemListProps> = ({
               ))}
             </select>
           </div>
-          <div className="text-lg font-bold text-gray-700 mt-4 lg:mt-0">${item.discountedPrice || item.normalPrice}</div>
+          <div className="text-lg font-bold text-gray-700 mt-4 lg:mt-0">{item.discountedPrice || item.normalPrice}</div>
           <div className="ml-0 lg:ml-5 mt-4 lg:mt-0">
             <button
               onClick={() => removeItem(item.id)}

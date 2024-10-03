@@ -20,7 +20,7 @@ const CartPage: React.FC = () => {
       const data = await response.json();
 
       const filteredItems = data.filter((item: Product) => {
-        return [54, 15].includes(item.id);
+        return [54, 15, 48].includes(item.id);
       });
 
       setCartItems(filteredItems);
