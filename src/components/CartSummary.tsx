@@ -5,52 +5,42 @@ interface CartSummaryProps {
   cartItems: Product[];
 }
 
-// Fixed shipping rates based on the shipping method
 const shippingRates: { [key: string]: number } = {
-  estándar: 5000, // Default shipping rate for "Estándar"
+  estándar: 5000,
   express: 10000,
   overnight: 15000,
 };
 
-// Helper function to parse price strings into numbers
-const parsePrice = (price: string): number => {
-  return parseInt(price.replace(/[.$]/g, ''), 10);
-};
-
-// Function to calculate the subtotal
 const calculateSubtotal = (cartItems: Product[]): number => {
   return cartItems.reduce((acc, item) => {
     const quantity = item.quantity || 1; 
     const normalPrice = item.normalPrice || item.discountedPrice;
-    return acc + parsePrice(normalPrice) * quantity;
+    return acc + normalPrice * quantity;
   }, 0);
 };
 
-// Function to calculate total discounts for items with discounts
 const calculateDiscounts = (cartItems: Product[]) => {
   const discountsArray = cartItems
-    .filter(item => parsePrice(item.normalPrice || item.discountedPrice) > parsePrice(item.discountedPrice))
+    .filter(item => item.normalPrice > item.discountedPrice) // Filtrar productos con descuento
     .map(item => {
-      const normalPrice = item.normalPrice || item.discountedPrice;
-      const discount = (parsePrice(normalPrice) - parsePrice(item.discountedPrice)) * (item.quantity || 1);
+      const discount = (item.normalPrice - item.discountedPrice) * (item.quantity || 1);
       return { name: item.name, discount };
     });
+
   const totalDiscounts = discountsArray.reduce((acc, item) => acc + item.discount, 0);
-  
+
   return { discountsArray, totalDiscounts };
 };
 
-// Function to calculate shipping cost based on the method
 const calculateShippingCost = (cartItems: Product[]): number => {
   return cartItems.reduce((acc, item) => {
     const method = item.shippingMethod ? item.shippingMethod.toLowerCase() : 'estándar';
     const shippingCostForItem = shippingRates[method] || 0;
     const quantity = item.quantity || 1;
-    return acc + shippingCostForItem * quantity; // Sum the shipping costs for each item
+    return acc + shippingCostForItem * quantity;
   }, 0);
 };
 
-// Function to calculate tax
 const calculateTax = (beforeTax: number, taxRate: number): number => {
   return beforeTax * taxRate;
 };
@@ -59,20 +49,19 @@ const CartSummary: React.FC<CartSummaryProps> = ({ cartItems }) => {
   const subtotal = calculateSubtotal(cartItems);
   const { discountsArray, totalDiscounts } = calculateDiscounts(cartItems);
   const shippingCost = calculateShippingCost(cartItems);
-  const taxRate = 0.19;
-  const tax = calculateTax(subtotal-totalDiscounts, taxRate);
+  const taxRate = 0.19; // 19% de IVA
+  const tax = calculateTax(subtotal - totalDiscounts, taxRate);
   const total = subtotal + tax + shippingCost - totalDiscounts;
 
   return (
     <aside className="order-summary bg-white p-5 border">
       <h3 className="text-xl mb-4 text-blue-900">Resumen de Compra</h3>
-      
+
       <div className="mb-3">
         <span>Subtotal:</span>
         <span> ${subtotal.toLocaleString()}</span>
       </div>
 
-      {/* Display individual item discounts */}
       {discountsArray.length > 0 && (
         <div className="mb-3">
           <span>Descuentos:</span>

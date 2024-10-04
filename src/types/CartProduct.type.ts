@@ -4,6 +4,6 @@ export interface Product {
   image: string;
   quantity: number;
   shippingMethod: string;
-  normalPrice: string;
-  discountedPrice: string;
+  normalPrice: number;
+  discountedPrice: number;
 }
