@@ -3,6 +3,6 @@ export interface ProductProps {
     name: string;
     rating: number;
     description: string;
-    normalPrice: string;
-    discountedPrice: string;
+    normalPrice: number;
+    discountedPrice: number;
     }

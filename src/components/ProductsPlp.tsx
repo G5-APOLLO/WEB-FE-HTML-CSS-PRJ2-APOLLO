@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProductProps } from '../types/ProductPlp.type';
 import { importImage } from '../utils/importImage';
+import { formatCurrency } from '../utils/formatCurrency';
 
 const Product: React.FC<ProductProps> = ({ image, name, rating, description, normalPrice, discountedPrice }) => {
     return (
@@ -25,8 +26,8 @@ const Product: React.FC<ProductProps> = ({ image, name, rating, description, nor
                 </div>
                 <p className="mb-4">{description}</p>
                 <div className="flex items-center">
-                    <span className="text-gray-500 line-through mr-2">{normalPrice}</span>
-                    <span className="text-red-500 font-semibold">{discountedPrice}</span>
+                    <span className="text-gray-500 line-through mr-2">{formatCurrency(normalPrice)}</span>
+                    <span className="text-red-500 font-semibold">{formatCurrency(discountedPrice)}</span>
                 </div>
                 <button className="bg-[#36382E] text-white w-full py-3 mt-6 rounded-lg text-xl">Agregar al carrito</button> 
             </div>
