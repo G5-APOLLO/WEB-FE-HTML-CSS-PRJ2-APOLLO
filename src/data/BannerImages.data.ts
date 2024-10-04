@@ -1,5 +1,5 @@
-import bannerImage from '../assets/img/banner_plp.png';
-import bannerImageRes from '../assets/img/banner-plp-res.png';
+import bannerImage from '../assets/img/banner.png';
+import bannerImageRes from '../assets/img/banner-res.png';
 
 export const bannerImages = [
   {
