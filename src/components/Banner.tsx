@@ -1,10 +1,5 @@
 import React from 'react';
-
-interface BannerProps {
-  image: string;
-  imageResponsive: string;
-  alt: string;
-}
+import { BannerProps } from '../types/Banner.type';
 
 const Banner: React.FC<BannerProps> = ({ image, imageResponsive, alt }) => {
   return (
