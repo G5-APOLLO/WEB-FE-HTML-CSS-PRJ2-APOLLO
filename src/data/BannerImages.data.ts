@@ -1,5 +1,7 @@
 import bannerImage from '../assets/img/banner.png';
 import bannerImageRes from '../assets/img/banner-res.png';
+import bannerPlpImage from '../assets/img/banner_plp.png';
+import bannerPlpImageRes from '../assets/img/banner-plp-res.png';
 
 export const bannerImages = [
   {
@@ -8,4 +10,10 @@ export const bannerImages = [
     imageResponsive: bannerImageRes, // Importa la imagen responsive
     alt: 'Banner Publicitario',
   },
+  {
+    id: 2,
+    image: bannerPlpImage, // Importa la imagen directamente
+    imageResponsive: bannerPlpImageRes, // Importa la imagen responsive
+    alt: 'Banner PLPL'
+  }
 ];

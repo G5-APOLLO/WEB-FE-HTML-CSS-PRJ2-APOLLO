@@ -7,6 +7,8 @@ import { useGetFilters } from '../hooks/useGetFilters';
 import { useProducts } from '../hooks/useProductsQuery';
 import Spinner from '../components/Spinner';
 import ErrorComponent from '../components/ErrorComponent';
+import Bannersection from '../components/BannerSection';
+
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -16,7 +18,7 @@ const useQuery = () => {
 
 const PLP: React.FC = () => {
     const query = useQuery();
-    const optionId = query.get('optionId') ?? ''; 
+    const optionId = query.get('optionId') ?? '';
     const optionName = query.get('optionName');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -31,7 +33,7 @@ const PLP: React.FC = () => {
     // filter products
 
     const filteredProducts = products.filter(product => product.optionId === Number(optionId));
-    
+
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastProduct = currentPage * itemsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
@@ -66,7 +68,7 @@ const PLP: React.FC = () => {
                             </div>
                         )}
                         {!isLoadingFilters && !isErrorFilters && isSuccessFilters && filters && filters.map((filter, index) => (
-                            <Filter key={index} title={filter.title} options={filter.options}  />
+                            <Filter key={index} title={filter.title} options={filter.options} />
                         ))}
                     </aside>
 
@@ -83,7 +85,7 @@ const PLP: React.FC = () => {
                         </div>
                         <div className="">
                             {isLoadingProducts ? (
-                                <Spinner/>
+                                <Spinner />
                             ) : isErrorProducts ? (
                                 <ErrorComponent message="Error al cargar productos" />
                             ) : (
@@ -112,11 +114,10 @@ const PLP: React.FC = () => {
                                     <button
                                         key={index + 1}
                                         onClick={() => handlePageChange(index + 1)}
-                                        className={`px-4 py-2 rounded-lg border ${
-                                            currentPage === index + 1
-                                                ? 'bg-[#36382E] text-white border-gray-800'
-                                                : 'bg-white text-gray-800 border-gray-300'
-                                        } hover:bg-gray-300`}
+                                        className={`px-4 py-2 rounded-lg border ${currentPage === index + 1
+                                            ? 'bg-[#36382E] text-white border-gray-800'
+                                            : 'bg-white text-gray-800 border-gray-300'
+                                            } hover:bg-gray-300`}
                                     >
                                         {index + 1}
                                     </button>
@@ -134,6 +135,7 @@ const PLP: React.FC = () => {
                     </section>
                 </div>
             </div>
+            <Bannersection id={1} />
         </Main>
     );
 };
