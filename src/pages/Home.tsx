@@ -2,6 +2,7 @@ import { Main } from "../layout/Main";
 import FeaturedProductsList from "../components/FeaturedProductList";
 import PromoImagesSection from "../components/PromoImagesSection";
 
+
 export function Home() {
   return (
     <Main>
