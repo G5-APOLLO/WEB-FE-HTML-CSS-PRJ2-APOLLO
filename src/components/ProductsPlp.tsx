@@ -4,6 +4,12 @@ import { importImage } from '../utils/importImage';
 import { formatCurrency } from '../utils/formatCurrency';
 
 const Product: React.FC<ProductProps> = ({ image, name, rating, description, normalPrice, discountedPrice }) => {
+
+    const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        console.log(`Producto agregado al carrito: ${name}`);
+    };
+
     return (
         <div className="flex flex-col md:flex-row items-center border p-6 mb-6 group font-poppins"> 
             <img 
@@ -29,10 +35,15 @@ const Product: React.FC<ProductProps> = ({ image, name, rating, description, nor
                     <span className="text-gray-500 line-through mr-2">{formatCurrency(normalPrice)}</span>
                     <span className="text-red-500 font-semibold">{formatCurrency(discountedPrice)}</span>
                 </div>
-                <button className="bg-[#36382E] text-white w-full py-3 mt-6 rounded-lg text-xl">Agregar al carrito</button> 
+                <button 
+                    onClick={handleAddToCart} 
+                    className="bg-[#36382E] text-white w-full py-3 mt-6 rounded-lg text-xl"
+                >
+                    Agregar al carrito
+                </button> 
             </div>
         </div>
-    )
+    );
 };
 
 export default Product;
