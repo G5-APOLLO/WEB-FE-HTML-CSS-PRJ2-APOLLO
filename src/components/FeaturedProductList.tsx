@@ -13,10 +13,10 @@ const FeaturedProductsList: React.FC = () => {
 
   const { data, error, isLoading } = useFeaturedProducts();
 
-  const filteredProducts = data.filter((product: ProductProps) => product.id >= 87);
 
   if (isLoading) return <Spinner />;
   if (error) return <ErrorComponent message="Failed to load featured products." />;
+  const filteredProducts = data.filter((product: ProductProps) => product.id >= 87);
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
