@@ -91,7 +91,7 @@ const PLP: React.FC = () => {
                             ) : (
                                 currentProducts.map((product) => (
                                     <Link
-                                        to={`/pdp?optionId=${product.id}&optionId=${product.name}&subcategoryId=${product.optionId}`}
+                                        to={`/pdp?optionId=${product.id}&optionId=${product.name}`}
                                         className="block"
                                         key={product.id}
                                     >
