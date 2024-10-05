@@ -22,18 +22,33 @@ const ProductDetailPage: React.FC = () => {
   const { data: product, error, isLoading } = useProductDetail(productId);
 
   if (isLoading) {
-    return <Spinner />;
+
+    return ( 
+      <Main>
+       <Spinner />;
+      </Main>
+    )
   }
 
-  if (error) {
-    return <ErrorComponent message="Error al cargar los detalles del producto." />;
+
+  if (!isLoading && error) {
+    return ( 
+      <Main>
+       <ErrorComponent message="Error al cargar los detalles del producto." />;
+      </Main>
+    )
   }
 
-  if (!product) {
-    return <div>No se encontró el producto.</div>;
+  if ( !isLoading && !product ) {
+    return (
+      <Main>
+        <ErrorComponent message="Error al cargar los detalles del producto." />;
+      </Main>
+    )
   }
+ 
 
-  return (
+  if (!isLoading && !error && product) {return (
     <Main>
       {/* Contenedor del nombre del producto */}
       <div className="text-center lg:text-center">
@@ -74,5 +89,5 @@ const ProductDetailPage: React.FC = () => {
     </Main>
   );
 };
-
+};
 export default ProductDetailPage;
