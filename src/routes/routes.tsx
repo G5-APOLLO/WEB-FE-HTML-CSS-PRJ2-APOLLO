@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "../pages/Home";
 import PLP from "../pages/plp";
-import ComingSoon from "../pages/ComingSoon";
 import CartPage from '../pages/Cart';
+import ProductDetailPage from "../pages/ProductDetailPage";
 
 export const router = createBrowserRouter(
   [
@@ -16,7 +16,7 @@ export const router = createBrowserRouter(
     },
     {
       path: `/pdp`,
-      element: <ComingSoon />,
+      element: <ProductDetailPage/>,
     },
     {
       path: `/cart`,
