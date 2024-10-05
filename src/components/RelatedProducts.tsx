@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Spinner from './Spinner'; 
 import ErrorComponent from './ErrorComponent'; 
-import { ProductProps } from '../types/Product.type'; 
+
 import { formatCurrency } from '../utils/formatCurrency';
+import { useRelatedProducts } from '../hooks/useRelatedProducts';
 
 interface RelatedProductsProps {
   optionId: number; 
@@ -10,46 +11,14 @@ interface RelatedProductsProps {
 }
 
 const RelatedProducts: React.FC<RelatedProductsProps> = ({ optionId, currentProductId }) => {
-  const [relatedProducts, setRelatedProducts] = useState<ProductProps[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const { data: relatedProducts, error, isLoading } = useRelatedProducts(optionId, currentProductId);
 
-  
-  const fetchRelatedProducts = async () => {
-    try {
-      const response = await fetch(`https://web-fe-prj2-api-apollo.onrender.com/plp?optionId=${optionId}`);
-      if (!response.ok) {
-        throw new Error('Error en la respuesta de la API');
-      }
-      const products: ProductProps[] = await response.json();
+  if (isLoading) return <Spinner />;
+  if (error) return <ErrorComponent message="Error al cargar productos relacionados." />;
 
-      
-      const filteredProducts = products.filter(product => product.optionId === optionId && product.id !== currentProductId);
-      
-      
-      const shuffleArray = (array: ProductProps[]) => array.sort(() => Math.random() - 0.5);
-      const randomProducts = shuffleArray(filteredProducts).slice(0, 4);
-
-      setRelatedProducts(randomProducts);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error al cargar productos relacionados:', error);
-      setError(true);
-      setLoading(false);
-    }
-  };
-
-  
-  useEffect(() => {
-    fetchRelatedProducts();
-  }, [optionId]);
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return <ErrorComponent message="Error al cargar productos relacionados." />;
+  // Verificar si `relatedProducts` está definido
+  if (!relatedProducts || relatedProducts.length === 0) {
+    return <p className="text-center">No se encontraron productos relacionados.</p>;
   }
 
   return (
