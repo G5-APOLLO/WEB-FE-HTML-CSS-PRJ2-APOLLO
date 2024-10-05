@@ -8,11 +8,7 @@ import { useProductDetail } from '../hooks/useProductDetail';
 import RelatedProducts from '../components/RelatedProducts';
 import { formatCurrency } from '../utils/formatCurrency';
 
-import { ProductProps } from '../types/ProductPlp.type';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../slices/cart.slice';
-
-const ProductDetailPage: React.FC<ProductProps> = () => {
+const ProductDetailPage: React.FC = () => {
   // Obtener el ID del producto desde la query
   const getProductIdFromQuery = () => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -24,26 +20,6 @@ const ProductDetailPage: React.FC<ProductProps> = () => {
   
   // Utilizar el hook para cargar los detalles del producto
   const { data: product, error, isLoading } = useProductDetail(productId);
-
-  const dispatch = useDispatch();
-
-    const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-
-        const productToAdd = {
-            id : product.id,
-            name : product.name,
-            image: product.image,
-            normalPrice : product.normalPrice,
-            discountedPrice : product.discountedPrice,
-            quantity: 1,
-            shippingMethod: 'estándar'
-        };
-
-        dispatch(addToCart(productToAdd));
-
-        console.log(`Producto agregado al carrito: ${name}`);
-    };
 
   if (isLoading) {
 
@@ -87,16 +63,13 @@ const ProductDetailPage: React.FC<ProductProps> = () => {
         <div className="bg-gray-100 p-6 flex flex-col items-center lg:items-start text-center lg:text-left">
           <p className="text-lg mb-2">{product.description}</p>
 
-          {product.normalPrice > 0 && (
-            <p className="text-2xl font-semibold mb-2">
-              Precio Normal: <span className="line-through">{formatCurrency(product.normalPrice)}</span>
-            </p>
-          )}
-
+          <p className="text-2xl font-semibold mb-2">
+            Precio Normal: <span className="line-through">{formatCurrency(product.normalPrice)}</span>
+          </p>
           <p className="text-2xl font-semibold mb-2 text-red-600">
             Precio con Descuento: {formatCurrency(product.discountedPrice)}
           </p>
-          <button  onClick={handleAddToCart} className="mt-2 bg-zinc-600 text-white px-3 py-1 rounded hover:bg-neutral-700">
+          <button className="mt-2 bg-zinc-600 text-white px-3 py-1 rounded hover:bg-neutral-700">
             Agregar a Carrito
           </button>
         </div>
