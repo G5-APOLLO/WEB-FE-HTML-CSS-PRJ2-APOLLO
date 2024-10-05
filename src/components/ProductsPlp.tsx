@@ -49,8 +49,14 @@ const Product: React.FC<ProductProps> = ({ id, image, name, rating, description,
                 </div>
                 <p className="mb-4">{description}</p>
                 <div className="flex items-center">
-                    <span className="text-gray-500 line-through mr-2">{formatCurrency(normalPrice)}</span>
-                    <span className="text-red-500 font-semibold">{formatCurrency(discountedPrice)}</span>
+                    {normalPrice > 0 && (
+                        <span className="text-gray-500 line-through mr-2">
+                            {formatCurrency(normalPrice)}
+                        </span>
+                    )}
+                    <span className="text-red-500 font-semibold">
+                        {formatCurrency(discountedPrice)}
+                    </span>
                 </div>
                 <button 
                     onClick={handleAddToCart} 
