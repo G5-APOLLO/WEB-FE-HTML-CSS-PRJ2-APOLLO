@@ -68,17 +68,15 @@ const CartItemList: React.FC<CartItemListProps> = ({
             <p>Cantidad:</p>
             <QuantitySelector
               quantity={item.quantity || 1}
-              maxQuantity={20} // Aquí puedes ajustar el máximo de unidades
+              maxQuantity={20}
               updateQuantity={(newQuantity) => updateQuantity(item.id, newQuantity)}
             />
           </div>
 
-          {/* Precio formateado */}
           <div className="text-lg font-bold text-gray-700 mt-4 lg:mt-0">
-            {formatCurrency(item.discountedPrice || item.normalPrice)} {/* Formatea el precio */}
+            {formatCurrency(item.discountedPrice || item.normalPrice)} 
           </div>
 
-          {/* Botón de eliminar */}
           <div className="ml-0 lg:ml-5 mt-4 lg:mt-0">
             <button
               onClick={() => removeItem(item.id)}
