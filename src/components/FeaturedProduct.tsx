@@ -36,7 +36,7 @@ const FeaturedProduct: React.FC<ProductProps> = ({ id, name, image, normalPrice,
 
       <Link to="/#">
         <button  onClick={handleAddToCart} className="mt-4 bg-zinc-600 text-white px-4 py-2 rounded hover:bg-neutral-700">
-          Añadir al carrito
+          Agregar al carrito
         </button>
       </Link>
     </div>
