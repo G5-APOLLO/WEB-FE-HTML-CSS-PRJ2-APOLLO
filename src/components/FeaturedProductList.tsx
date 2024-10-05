@@ -22,7 +22,7 @@ const FeaturedProductsList: React.FC = () => {
 
       {filteredProducts.slice(0, 12).map((product: ProductProps) => (
         <Link
-          to={`/pdp?optionId=${product.id}`}
+          to={`/pdp?optionId=${product.id}&optionName=${product.name}`}
           className="block"
           key={product.id}
         >
