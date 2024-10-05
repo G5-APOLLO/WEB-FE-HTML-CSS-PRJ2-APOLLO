@@ -42,7 +42,7 @@ const ProductDetailPage: React.FC = () => {
       
       {/* Contenedor de la imagen y la descripción */}
       <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-center">
-        <div className="w-full md:w-[35%] mb-5 md:mb-0 md:mr-6 transform transition-transform duration-300 ease-in-out group-hover:scale-110">
+        <div className="w-full md:w-[25%] mb-5 md:mb-0 md:mr-6 ">
           <img src={product.image} alt={product.name} />
         </div>
         <div className="bg-gray-100 p-6 flex flex-col items-center lg:items-start text-center lg:text-left">
