@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { importImage } from '../utils/importImage';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/cart.store'; 
 
 export function Header() {
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  const totalItemsInCart = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <header className="h-[70px] sm:h-[100px] bg-custom-radial-header flex justify-between items-center pl-2 sm:pl-6 pr-7">
       <div className="flex-shrink-0">
@@ -41,16 +47,21 @@ export function Header() {
           />
           <span className="text-xs sm:text-base ml-2">Mi Cuenta</span>
         </a>
-        <Link to="/cart" className="flex items-center text-white ml-6">
+        <Link to="/cart" className="relative flex items-center text-white ml-6">
           <img 
             className="w-[25px] h-[25px] sm:w-[40px] sm:h-[40px]"
             src={importImage("shopping-cart-svgrepo-com.svg")}
             alt="Carrito" 
           />
           <span className="text-xs sm:text-base ml-2">Carrito</span>
+
+          {totalItemsInCart > 0 && (
+            <span className="absolute top-[-10px] right-[-10px] bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs sm:text-sm">
+              {totalItemsInCart}
+            </span>
+          )}
         </Link>
       </nav>
     </header>
   );
 }
-

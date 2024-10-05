@@ -1,6 +1,7 @@
 import React from 'react';
 import { Product } from '../types/CartProduct.type';
 import QuantitySelector from '../components/QuantitySelector';
+import { formatCurrency } from '../utils/formatCurrency'; // Asegúrate de que esté bien importada
 
 interface CartItemListProps {
   cartItems: Product[];
@@ -8,8 +9,6 @@ interface CartItemListProps {
   updateShippingMethod: (id: number, method: string) => void;
   removeItem: (id: number) => void;
 }
-
-
 
 const CartItemList: React.FC<CartItemListProps> = ({
   cartItems,
@@ -64,7 +63,9 @@ const CartItemList: React.FC<CartItemListProps> = ({
               updateQuantity={(newQuantity) => updateQuantity(item.id, newQuantity)}
             />
           </div>
-          <div className="text-lg font-bold text-gray-700 mt-4 lg:mt-0">{item.discountedPrice || item.normalPrice}</div>
+          <div className="text-lg font-bold text-gray-700 mt-4 lg:mt-0">
+            {formatCurrency(item.discountedPrice || item.normalPrice)} {/* Formatea el precio */}
+          </div>
           <div className="ml-0 lg:ml-5 mt-4 lg:mt-0">
             <button
               onClick={() => removeItem(item.id)}

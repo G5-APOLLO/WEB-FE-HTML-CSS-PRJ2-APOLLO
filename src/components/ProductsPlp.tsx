@@ -2,11 +2,28 @@ import React from 'react';
 import { ProductProps } from '../types/ProductPlp.type';
 import { importImage } from '../utils/importImage';
 import { formatCurrency } from '../utils/formatCurrency';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../slices/cart.slice';
 
-const Product: React.FC<ProductProps> = ({ image, name, rating, description, normalPrice, discountedPrice }) => {
+const Product: React.FC<ProductProps> = ({ id, image, name, rating, description, normalPrice, discountedPrice }) => {
+    
+    const dispatch = useDispatch();
 
     const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+
+        const productToAdd = {
+            id,
+            name,
+            image,
+            normalPrice,
+            discountedPrice,
+            quantity: 1,
+            shippingMethod: 'estándar'
+        };
+
+        dispatch(addToCart(productToAdd));
+
         console.log(`Producto agregado al carrito: ${name}`);
     };
 

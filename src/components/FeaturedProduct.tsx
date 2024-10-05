@@ -1,11 +1,27 @@
 import React from 'react';
-//import { importImage } from '../utils/importImage';
 import { ProductProps } from '../types/Product.type';
 import { formatCurrency } from '../utils/formatCurrency';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../slices/cart.slice';
+import { useDispatch } from 'react-redux';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, discountedPrice, discount}) => {
+const FeaturedProduct: React.FC<ProductProps> = ({ id, name, image, normalPrice, discountedPrice, discount}) => {
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    const product = {
+      id,
+      name,
+      image,
+      normalPrice,
+      discountedPrice,
+      quantity: 1,
+      shippingMethod: 'estándar', 
+    };
+    dispatch(addToCart(product));
+  };
+
   return (
     <div className="bg-zinc-100 rounded-lg shadow-md flex flex-col justify-between items-center p-4 hover:shadow-lg hover:bg-gray-100 hover:scale-105 transition duration-300 transform h-full">
       <div>
@@ -19,7 +35,7 @@ const FeaturedProduct: React.FC<ProductProps> = ({ name, image, normalPrice, dis
 
 
       <Link to="/#">
-        <button className="mt-4 bg-zinc-600 text-white px-4 py-2 rounded hover:bg-neutral-700">
+        <button  onClick={handleAddToCart} className="mt-4 bg-zinc-600 text-white px-4 py-2 rounded hover:bg-neutral-700">
           Añadir al carrito
         </button>
       </Link>
