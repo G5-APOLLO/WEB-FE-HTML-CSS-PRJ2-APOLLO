@@ -6,12 +6,14 @@ import TechnicalSpecifications from '../components/TechnicalSpecifications';
 import { ProductProps } from '../types/Product.type'; 
 import RelatedProducts from '../components/RelatedProducts';
 import { formatCurrency } from '../utils/formatCurrency';
-
+import { useDispatch } from 'react-redux'; // Importa useDispatch
+import { addToCart } from '../slices/cart.slice'; // Importa la acción addToCart
 
 const ProductDetailPage: React.FC = () => {
   const [product, setProduct] = useState<ProductProps | null>(null); 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const dispatch = useDispatch(); // Inicializa useDispatch para usar Redux
 
   // Función para obtener el ID del producto de la URL
   const getProductIdFromQuery = () => {
@@ -43,10 +45,27 @@ const ProductDetailPage: React.FC = () => {
     }
   };
 
-
   useEffect(() => {
     fetchProductDetail();
   }, []);
+
+  // Función para agregar el producto al carrito
+  const handleAddToCart = () => {
+    if (product) {
+      const productToAdd = {
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        quantity: 1, // Cantidad inicial en el carrito
+        shippingMethod: 'estándar', // Método de envío por defecto
+        normalPrice: product.normalPrice,
+        discountedPrice: product.discountedPrice,
+      };
+
+      dispatch(addToCart(productToAdd)); // Despachar la acción para agregar el producto al carrito
+      alert(`Producto "${product.name}" agregado al carrito.`);
+    }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -60,13 +79,13 @@ const ProductDetailPage: React.FC = () => {
     return (
       <Main>
         {/* Contenedor del nombre del producto */}
-        <div className="  text-center lg:text-center">
+        <div className="text-center lg:text-center">
           <h1 className="text-3xl font-bold ">{product.name}</h1> 
         </div>
         
         {/* Contenedor de la imagen y la descripción */}
         <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-center ">
-          <div className="w-full md:w-[35%] mb-5 md:mb-0 md:mr-6 transform transition-transform duration-300 ease-in-out group-hover:scale-110" >
+          <div className="w-full md:w-[35%] mb-5 md:mb-0 md:mr-6 transform transition-transform duration-300 ease-in-out group-hover:scale-110">
             <img src={product.image} alt={product.name} />
           </div>
           <div className="bg-gray-100 p-6 flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -78,14 +97,17 @@ const ProductDetailPage: React.FC = () => {
             <p className="text-2xl font-semibold mb-2 text-red-600">
               Precio con Descuento: {formatCurrency(product.discountedPrice)}
             </p>
-            <button className="mt-2 bg-zinc-600 text-white px-3 py-1 rounded hover:bg-neutral-700">
+            <button 
+              className="mt-2 bg-zinc-600 text-white px-3 py-1 rounded hover:bg-neutral-700"
+              onClick={handleAddToCart} // Manejar clic en el botón
+            >
               Agregar a Carrito
             </button>
           </div>
         </div>
         
         {/* Especificaciones técnicas */}
-        <div className=" w-auto  mx-auto flex flex-col lg:flex-row items-center justify-center p-2">
+        <div className="w-auto mx-auto flex flex-col lg:flex-row items-center justify-center p-2">
           <div className="w-full">
             <TechnicalSpecifications specifications={product.specifications} />
           </div>
@@ -93,12 +115,10 @@ const ProductDetailPage: React.FC = () => {
 
         {/* Productos relacionados */}
         <div className="related-products-section">
-        <RelatedProducts optionId={product.optionId} currentProductId={product.id} />
+          <RelatedProducts optionId={product.optionId} currentProductId={product.id} />
         </div>
-
       </Main>
-    
-     );
+    );
   }
 
   return <div>No se encontró el producto.</div>;
